@@ -54,6 +54,44 @@ datasets/ecg_datasets/PTBXL_PREPROC_QRS/superdiagnostic/
 
 These files are generated from the PTB-XL Superdiagnostic data after ECG preprocessing and QRS tokenization.
 
+## Processed Dataset Download
+
+The processed QRS-tokenized PTB-XL Superdiagnostic dataset used for the final proposed HeartLang experiment is available through Google Drive:
+
+https://drive.google.com/drive/folders/1wgVIwNyUvh9EoexPOBPknJcXpEUXAtDL
+
+Because the dataset archive is large, it is provided as split archive parts:
+
+```text
+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part01
+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part02
+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part03
+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part04
+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part05
+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part06
+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part07
+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part08
+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part09
+```
+
+After downloading all parts, they can be combined on Windows using:
+
+```bat
+copy /b HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part01+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part02+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part03+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part04+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part05+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part06+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part07+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part08+HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz.part09 HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz
+```
+
+Then extract the archive using:
+
+```bat
+tar -xzf HeartLang_PTBXL_PREPROC_QRS_superdiagnostic_dataset.tar.gz
+```
+
+The extracted folder should be placed at:
+
+```text
+datasets/ecg_datasets/PTBXL_PREPROC_QRS/superdiagnostic/
+```
+
 ## Preprocessing
 
 The final proposed method applies ECG preprocessing before QRS tokenization:
@@ -94,4 +132,4 @@ Large files excluded from this repository include:
 - Trained `.pth` checkpoint files
 - Large archive backups such as `.tar.gz`
 
-If required, the processed dataset and trained checkpoints can be shared separately through external storage such as Google Drive, OneDrive, institutional storage, or another dataset hosting platform.
+The trained checkpoint files are still excluded from GitHub because of file size. They can be shared separately through external storage if required.

@@ -87,6 +87,8 @@ Detailed dataset source, split information, expected processed files, and prepar
 DATASET.md
 ```
 
+The processed QRS-tokenized dataset used in the final proposed experiment is available through the Google Drive link listed in `DATASET.md`.
+
 Excluded large files include:
 
 - `*.pth`
