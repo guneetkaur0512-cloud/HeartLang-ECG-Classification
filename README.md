@@ -81,6 +81,12 @@ The `figures/` directory contains the final publication-style figures used for t
 
 The raw PTB-XL dataset, processed NumPy arrays, and trained checkpoint files are not committed to this repository because they are large. The PTB-XL dataset is publicly available from PhysioNet. Trained checkpoints and processed data can be shared separately if required.
 
+Detailed dataset source, split information, expected processed files, and preparation notes are provided in:
+
+```text
+DATASET.md
+```
+
 Excluded large files include:
 
 - `*.pth`
