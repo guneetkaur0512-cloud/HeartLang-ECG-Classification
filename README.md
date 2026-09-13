@@ -64,14 +64,18 @@ This value is computed across three random seeds: 0, 1, and 2.
 
 ## Figures
 
-The `figures/` directory contains publication-style plots including:
+The `figures/` directory contains the final publication-style figures used for the project and paper:
 
-- Training dynamics
-- Baseline comparison
-- Data-efficiency analysis
-- Per-class ROC curves
-- Performance heatmap
-- G-Mean and confusion-matrix related outputs
+- `PROPOSED METHODOLOGY FIGURE.png`
+- `figure Heartlang architecture.png`
+- `comparison baseline models.png`
+- `per class AUC_ROC.png`
+- `per class confusion matrix.png`
+- `data_efficiency_preprocessed_heartlang_ieee.png`
+- `training_dynamics.png`
+- `all_models_training_dynamics_highlighted.png`
+- `grouped_model_metric_comparison.png`
+- `performance_metrics_heatmap_ieee.png`
 
 ## Dataset and Checkpoints
 
