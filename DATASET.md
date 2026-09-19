@@ -1,30 +1,28 @@
 # Dataset Availability and Preparation
 
-This project uses the PTB-XL Superdiagnostic dataset for multi-label ECG classification.
+This project primarily uses the PTB-XL Superdiagnostic dataset for multi-label ECG classification. A second dataset workflow for CPSC2018 is included for additional external validation.
 
-## Dataset Source
+## PTB-XL Dataset Source
 
 The original PTB-XL dataset is publicly available through PhysioNet:
 
 https://physionet.org/content/ptb-xl/
 
-Users should download the dataset from the official source and follow the preprocessing and tokenization steps described below.
+Users should download the dataset from the official source and follow the preprocessing and tokenization steps described below, unless they use the processed ready-to-train archive shared separately.
 
-## Task
+## PTB-XL Task
 
 The experiments use the PTB-XL Superdiagnostic classification task with five diagnostic classes:
 
-- NORM
-- MI
-- STTC
-- CD
-- HYP
+```text
+NORM, MI, STTC, CD, HYP
+```
 
-## Dataset Split
+## PTB-XL Dataset Split
 
 The experiments use fixed pre-generated train, validation, and held-out test splits:
 
-| Split | Number of ECG samples |
+| Split | ECG samples |
 |---|---:|
 | Training | 17,084 |
 | Validation | 2,146 |
@@ -32,29 +30,29 @@ The experiments use fixed pre-generated train, validation, and held-out test spl
 
 For data-efficiency experiments, only the training split was randomly subsampled. The validation and test sets were kept unchanged.
 
-## Processed Dataset Files
+## PTB-XL Processed Dataset Files
 
 The final HeartLang experiments expect the following processed QRS-tokenized files:
 
 ```text
 datasets/ecg_datasets/PTBXL_PREPROC_QRS/superdiagnostic/
-├── train_data.npy
-├── train_labels.npy
-├── train_data_in_chans.npy
-├── train_data_in_times.npy
-├── val_data.npy
-├── val_labels.npy
-├── val_data_in_chans.npy
-├── val_data_in_times.npy
-├── test_data.npy
-├── test_labels.npy
-├── test_data_in_chans.npy
-└── test_data_in_times.npy
+  train_data.npy
+  train_labels.npy
+  train_data_in_chans.npy
+  train_data_in_times.npy
+  val_data.npy
+  val_labels.npy
+  val_data_in_chans.npy
+  val_data_in_times.npy
+  test_data.npy
+  test_labels.npy
+  test_data_in_chans.npy
+  test_data_in_times.npy
 ```
 
 These files are generated from the PTB-XL Superdiagnostic data after ECG preprocessing and QRS tokenization.
 
-## Processed Dataset Download
+## PTB-XL Processed Dataset Download
 
 The processed QRS-tokenized PTB-XL Superdiagnostic dataset used for the final proposed HeartLang experiment is available through Google Drive:
 
@@ -92,7 +90,7 @@ The extracted folder should be placed at:
 datasets/ecg_datasets/PTBXL_PREPROC_QRS/superdiagnostic/
 ```
 
-## Preprocessing
+## PTB-XL Preprocessing
 
 The final proposed method applies ECG preprocessing before QRS tokenization:
 
@@ -105,7 +103,7 @@ The preprocessing script is:
 create_filtered_ptbxl_super.py
 ```
 
-## QRS Tokenization
+## PTB-XL QRS Tokenization
 
 The QRS tokenization script used for the preprocessed dataset is:
 
@@ -121,15 +119,61 @@ Channel index tensor: (N, 256)
 Time index tensor:    (N, 256)
 ```
 
-## Why the Dataset Is Not Stored Directly in GitHub
+## CPSC2018 Ready-to-Train Dataset
 
-The raw PTB-XL dataset and generated NumPy arrays are large binary files. They are not committed directly to this repository because standard GitHub repositories have file-size and repository-size limitations.
+CPSC2018 is being prepared as a second ECG dataset for HeartLang evaluation. The final goal is to provide a ready-to-train QRS-tokenized folder so that no additional preprocessing or QRS tokenization is required before training.
+
+Expected final folder:
+
+```text
+datasets/ecg_datasets/CPSC2018_QRS/data/
+  train_data.npy
+  train_labels.npy
+  train_data_in_chans.npy
+  train_data_in_times.npy
+  val_data.npy
+  val_labels.npy
+  val_data_in_chans.npy
+  val_data_in_times.npy
+  test_data.npy
+  test_labels.npy
+  test_data_in_chans.npy
+  test_data_in_times.npy
+```
+
+Expected CPSC2018 split:
+
+| Split | Records |
+|---|---:|
+| Train | 4,950 |
+| Validation | 551 |
+| Test | 1,376 |
+| Total | 6,877 |
+
+The CPSC2018 task uses nine labels:
+
+```text
+AFIB, VPC, NORM, 1AVB, CRBBB, STE, PAC, CLBBB, STD
+```
+
+Once the ready-to-train folder is available, training should use:
+
+```text
+--dataset_dir datasets/ecg_datasets/CPSC2018_QRS/data
+--nb_classes 9
+```
+
+The final CPSC2018 ready-to-train archive will be shared separately through external storage after preprocessing and QRS tokenization are complete. See `CPSC2018_SECOND_DATASET.md` for the complete workflow and training commands.
+
+## Why Large Datasets Are Not Stored Directly in GitHub
+
+Raw ECG datasets, generated NumPy arrays, and trained checkpoint files are large binary files. They are not committed directly to this repository because standard GitHub repositories have file-size and repository-size limitations.
 
 Large files excluded from this repository include:
 
-- Raw PTB-XL WFDB records
+- Raw WFDB or MATLAB ECG records
 - Processed `.npy` dataset arrays
 - Trained `.pth` checkpoint files
 - Large archive backups such as `.tar.gz`
 
-The trained checkpoint files are still excluded from GitHub because of file size. They can be shared separately through external storage if required.
+These files should be downloaded from official sources or shared separately through external storage when required.

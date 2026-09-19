@@ -1,6 +1,6 @@
 # HeartLang ECG Classification on PTB-XL Superdiagnostic Dataset
 
-This repository contains the code, experiment scripts, result files, and paper figures for a HeartLang-based multi-label ECG classification project on the PTB-XL Superdiagnostic dataset.
+This repository contains the code, experiment scripts, result files, and paper figures for a HeartLang-based multi-label ECG classification project on the PTB-XL Superdiagnostic dataset. A second-dataset workflow for CPSC2018 is also included so that HeartLang can be evaluated beyond PTB-XL.
 
 ## Project Overview
 
@@ -36,6 +36,28 @@ The experiments used pre-generated train, validation, and held-out test splits:
 
 For data-efficiency experiments, only the training split was randomly subsampled. Validation and test sets were kept fixed.
 
+## Second Dataset: CPSC2018
+
+To support external validation on another ECG dataset, this repository also includes a CPSC2018 preparation workflow. CPSC2018 contains 6,877 public 12-lead ECG recordings with nine diagnostic/rhythm labels:
+
+```text
+AFIB, VPC, NORM, 1AVB, CRBBB, STE, PAC, CLBBB, STD
+```
+
+The intended final deliverable is a ready-to-train QRS-tokenized dataset at:
+
+```text
+datasets/ecg_datasets/CPSC2018_QRS/data/
+```
+
+Once this folder is available, no preprocessing or QRS tokenization is required before training. The training script can be run directly using `run_class_finetuning.py` with `--dataset_dir datasets/ecg_datasets/CPSC2018_QRS/data` and `--nb_classes 9`.
+
+Detailed CPSC2018 dataset preparation, expected file layout, and training commands are provided in:
+
+```text
+CPSC2018_SECOND_DATASET.md
+```
+
 ## Main Result
 
 The final HeartLang model with ECG preprocessing achieved:
@@ -57,6 +79,8 @@ This value is computed across three random seeds: 0, 1, and 2.
 | `QRSTokenizer_PTBXL_PREPROC.py` | QRS tokenization for preprocessed PTB-XL data |
 | `run_ptbxl_baselines.py` | Baseline model experiments |
 | `run_ptbxl_baselines_with_curves.py` | Baseline training-curve experiments |
+| `prepare_cpsc2018_ready_dataset.py` | CPSC2018 raw-to-NumPy preparation helper |
+| `CPSC2018_SECOND_DATASET.md` | Second-dataset preparation and training notes |
 | `results/` | Result CSV files and per-class AUC outputs |
 | `figures/` | Publication-style figures |
 | `docs/` | Research paper/report files |
