@@ -54,31 +54,42 @@ def load_cpsc_mat(path):
     raise KeyError(f"Unsupported MAT structure in {path}. Keys: {list(mat.keys())}")
 
 
-def download_record(record_name, raw_dir, retries=5, sleep_seconds=5):
+def candidate_urls(record_name):
+    primary_group = cpsc_physionet_group(record_name)
+    groups = [primary_group] + [f"g{i}" for i in range(1, 8) if f"g{i}" != primary_group]
+    return [f"{PHYSIONET_CPSC_BASE}/{group}/{record_name}.mat" for group in groups]
+
+
+def download_record(record_name, raw_dir, retries=3, sleep_seconds=5):
     raw_dir.mkdir(parents=True, exist_ok=True)
     target = raw_dir / f"{record_name}.mat"
     if target.exists():
         return target
 
-    url = f"{PHYSIONET_CPSC_BASE}/{cpsc_physionet_group(record_name)}/{record_name}.mat"
     tmp_target = raw_dir / f"{record_name}.mat.part"
 
-    for attempt in range(1, retries + 1):
-        try:
-            if tmp_target.exists():
-                tmp_target.unlink()
-            print(f"Downloading {record_name}.mat (attempt {attempt}/{retries})")
-            urllib.request.urlretrieve(url, tmp_target)
-            tmp_target.replace(target)
-            break
-        except Exception as exc:
-            if tmp_target.exists():
-                tmp_target.unlink()
-            if attempt == retries:
-                raise
-            print(f"Download failed for {record_name}.mat: {exc}. Retrying in {sleep_seconds}s...")
-            time.sleep(sleep_seconds)
+    last_error = None
+    for url in candidate_urls(record_name):
+        for attempt in range(1, retries + 1):
+            try:
+                if tmp_target.exists():
+                    tmp_target.unlink()
+                print(f"Downloading {record_name}.mat from {url} (attempt {attempt}/{retries})")
+                urllib.request.urlretrieve(url, tmp_target)
+                tmp_target.replace(target)
+                return target
+            except Exception as exc:
+                last_error = exc
+                if tmp_target.exists():
+                    tmp_target.unlink()
+                # 404 usually means this record is stored under a different group; try the next URL.
+                if "HTTP Error 404" in str(exc):
+                    break
+                if attempt < retries:
+                    print(f"Download failed for {record_name}.mat: {exc}. Retrying in {sleep_seconds}s...")
+                    time.sleep(sleep_seconds)
 
+    raise FileNotFoundError(f"Could not download {record_name}.mat from any PhysioNet CPSC2018 group. Last error: {last_error}")
     return target
 
 

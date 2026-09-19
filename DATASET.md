@@ -163,7 +163,36 @@ Once the ready-to-train folder is available, training should use:
 --nb_classes 9
 ```
 
-The final CPSC2018 ready-to-train archive will be shared separately through external storage after preprocessing and QRS tokenization are complete. See `CPSC2018_SECOND_DATASET.md` for the complete workflow and training commands.
+The final CPSC2018 ready-to-train archive is available in the same Google Drive folder:
+
+https://drive.google.com/drive/folders/1wgVIwNyUvh9EoexPOBPknJcXpEUXAtDL
+
+Download both parts:
+
+```text
+HeartLang_CPSC2018_QRS_ready_to_train_dataset.tar.gz.part01
+HeartLang_CPSC2018_QRS_ready_to_train_dataset.tar.gz.part02
+```
+
+Combine them on Windows using:
+
+```bat
+copy /b HeartLang_CPSC2018_QRS_ready_to_train_dataset.tar.gz.part01+HeartLang_CPSC2018_QRS_ready_to_train_dataset.tar.gz.part02 HeartLang_CPSC2018_QRS_ready_to_train_dataset.tar.gz
+```
+
+Then extract:
+
+```bat
+tar -xzf HeartLang_CPSC2018_QRS_ready_to_train_dataset.tar.gz
+```
+
+The extracted folder should be placed so that the final path is:
+
+```text
+datasets/ecg_datasets/CPSC2018_QRS/data/
+```
+
+See `CPSC2018_SECOND_DATASET.md` for the complete workflow and training commands.
 
 ## Why Large Datasets Are Not Stored Directly in GitHub
 

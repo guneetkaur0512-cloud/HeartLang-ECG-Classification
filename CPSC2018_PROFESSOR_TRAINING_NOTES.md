@@ -29,6 +29,33 @@ test_data_in_times.npy
 
 No raw-signal preprocessing or QRS tokenization is required if this folder is already present.
 
+## Dataset Download
+
+The ready-to-train CPSC2018 QRS dataset is shared through the project Google Drive folder:
+
+```text
+https://drive.google.com/drive/folders/1wgVIwNyUvh9EoexPOBPknJcXpEUXAtDL
+```
+
+Download both CPSC2018 archive parts:
+
+```text
+HeartLang_CPSC2018_QRS_ready_to_train_dataset.tar.gz.part01
+HeartLang_CPSC2018_QRS_ready_to_train_dataset.tar.gz.part02
+```
+
+Combine them on Windows:
+
+```bat
+copy /b HeartLang_CPSC2018_QRS_ready_to_train_dataset.tar.gz.part01+HeartLang_CPSC2018_QRS_ready_to_train_dataset.tar.gz.part02 HeartLang_CPSC2018_QRS_ready_to_train_dataset.tar.gz
+```
+
+Extract:
+
+```bat
+tar -xzf HeartLang_CPSC2018_QRS_ready_to_train_dataset.tar.gz
+```
+
 ## Dataset Summary
 
 | Split | Records |
