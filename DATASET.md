@@ -56,7 +56,7 @@ These files are generated from the PTB-XL Superdiagnostic data after ECG preproc
 
 The processed QRS-tokenized PTB-XL Superdiagnostic dataset used for the final proposed HeartLang experiment is available through Google Drive:
 
-https://drive.google.com/drive/folders/1wgVIwNyUvh9EoexPOBPknJcXpEUXAtDL
+https://drive.google.com/drive/folders/1wgVIwNyUvh9EoexPOBPknJcXpEUXAtDL?usp=drive_link
 
 Because the dataset archive is large, it is provided as split archive parts:
 
@@ -165,7 +165,7 @@ Once the ready-to-train folder is available, training should use:
 
 The final CPSC2018 ready-to-train archive is available in the same Google Drive folder:
 
-https://drive.google.com/drive/folders/1wgVIwNyUvh9EoexPOBPknJcXpEUXAtDL
+https://drive.google.com/drive/folders/1wgVIwNyUvh9EoexPOBPknJcXpEUXAtDL?usp=drive_link
 
 Download both parts:
 

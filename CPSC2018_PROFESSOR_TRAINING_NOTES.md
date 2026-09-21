@@ -34,7 +34,7 @@ No raw-signal preprocessing or QRS tokenization is required if this folder is al
 The ready-to-train CPSC2018 QRS dataset is shared through the project Google Drive folder:
 
 ```text
-https://drive.google.com/drive/folders/1wgVIwNyUvh9EoexPOBPknJcXpEUXAtDL
+https://drive.google.com/drive/folders/1wgVIwNyUvh9EoexPOBPknJcXpEUXAtDL?usp=drive_link
 ```
 
 Download both CPSC2018 archive parts:
